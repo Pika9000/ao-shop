@@ -173,3 +173,165 @@ body {
 .btn-add-cart:hover {
   background-color: #218838;
 }
+
+/* Admin UI */
+.admin-login-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.admin-login-box {
+  width: 100%;
+  max-width: 400px;
+}
+
+.admin-hint {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 40px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.admin-card h3 {
+  margin-bottom: 16px;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 9px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.admin-form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-primary {
+  background-color: #000;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background-color: #0d6efd;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-alert {
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.admin-alert-ok {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.admin-alert-error {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.admin-thumb {
+  width: 48px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.admin-subtext {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.admin-actions-cell {
+  white-space: nowrap;
+}

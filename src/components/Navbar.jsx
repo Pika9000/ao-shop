@@ -19,6 +19,7 @@ export function Navbar() {
         </Link>
         
         <nav className="nav-links">
+          <Link href="/admin">⚙️ Admin</Link>
           <Link href="/cart">🛒 Giỏ hàng ({totalItems})</Link>
           
           {session ? (
