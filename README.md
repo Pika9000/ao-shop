@@ -1,6 +1,29 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Cấu hình biến môi trường (`.env`)
+## Hướng dẫn cài đặt và chạy dự án (Dành cho thành viên nhóm)
+
+### Yêu cầu cài đặt sẵn trên máy
+- **Node.js** (phiên bản 18 trở lên)
+- **MySQL Server** / **MySQL Workbench** (hoặc XAMPP, chạy ở cổng `3306`)
+- **Git**
+
+---
+
+### Bước 1: Tải dự án và cài đặt toàn bộ thư viện
+Mở Terminal tại thư mục dự án và chạy lệnh sau để tự động cài đặt toàn bộ công cụ có trong `package.json` (Next.js, Prisma, NextAuth, PayPal, Nodemailer...):
+
+```bash
+npm install
+```
+
+### Bước 2: Tạo Database trong MySQL
+Mở **MySQL Workbench** (hoặc công cụ quản lý MySQL của bạn) và chạy câu lệnh SQL sau để tạo kho dữ liệu trống:
+
+```sql
+CREATE DATABASE ao_db;
+```
+
+### Bước 3: Cấu hình biến môi trường (`.env`)
 
 Vì các file `.env*` chứa thông tin nhạy cảm nên đã bị chặn trong `.gitignore`. Khi mới `git clone` dự án về máy, bạn cần thực hiện các bước sau trước khi chạy:
 
@@ -38,11 +61,19 @@ ADMIN_PASSWORD="admin123"
 ```
 
 > **Lưu ý quan trọng:**
-> - Đảm bảo bạn đã tạo sẵn database tên `ao_db` trong MySQL (`CREATE DATABASE ao_db;`).
+> - Để chạy web cơ bản và trang Admin, bạn **chỉ cần đổi đúng dòng `DATABASE_URL`** theo mật khẩu MySQL trên máy của bạn.
 > - Nếu trong máy bạn có cả 2 file `.env` và `.env.local`, Next.js sẽ ưu tiên đọc `.env.local` đè lên `.env` (trong khi Prisma CLI đọc `.env`). Vì vậy hãy dùng thống nhất 1 file `.env` hoặc đảm bảo `DATABASE_URL` ở cả 2 file giống hệt nhau.
-> - Sau khi cấu hình `.env` xong, chạy lệnh `npx prisma db push` (để tạo bảng) trước khi chạy `npm run dev`.
 
-## Getting Started
+### Bước 4: Khởi tạo bảng Database (Prisma) và dữ liệu mẫu (Seed)
+Chạy lần lượt 3 lệnh sau trong Terminal để tạo bảng vào MySQL và nạp sẵn 4 mẫu áo:
+
+```bash
+npx prisma generate
+npx prisma db push
+npx tsx prisma/seed.ts
+```
+
+### Bước 5: Chạy dự án (Getting Started)
 
 First, run the development server:
 
