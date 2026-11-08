@@ -1,0 +1,152 @@
+.navigation {
+    position: sticky;
+    z-index: 1000;
+    top: 0;
+}
+
+
+
+/* phần bar */
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.nav-container {
+    background-color: #55E6D5;
+    padding: 8px;
+}
+
+.nav-container .inner-bar {
+    text-align:center;
+}
+
+.inner-marquee .inner-title {
+    font-weight: 700;
+}
+
+/* end bar */
+
+/* thanh điều hướng */
+.main-header {
+    background-color: white;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.inner-wrap .main-top {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 15px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-left .logo-lumen {
+    width: auto;
+    height: 30px;
+}
+
+/* logo và menu */
+.inner-wrap .header-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+
+.inner-wrap .header-between {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* end logo và menu */
+
+
+/* header-right */
+.inner-wrap .header-right {
+    flex: 1; 
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    gap: 20px; 
+}
+
+/*end header-right */
+
+
+/* thanh điều hướng ở dưới */
+.inner-wrap .main-bot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    
+}
+
+.main-bot .main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav .dieu-huong {
+    gap: 60px;
+    font-weight: 600;
+    padding: 15px;
+    display: flex;
+}
+/*end thanh điều hướng ở dưới */
+
+/* các icon */
+#search {
+  width: 100%;
+  padding: 8px 40px 8px 14px;
+  border: 1px solid #cccccc;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+}
+
+
+/* Nút bấm chứa icon */
+.btn-menu, .btn-search {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Kích thước Icon */
+.btn-menu .icon-menu, 
+.icon-search, 
+.btn-store img, 
+.btn-user img, 
+.btn-cart img {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Hiệu ứng rê chuột (Hover) */
+.btn-menu:hover .icon-menu, .icon-search {
+  transform: scale(1.15);
+  opacity: 0.8;
+}
+
+/* Các item điều hướng (Giỏ hàng, Người dùng, Cửa hàng) */
+.btn-cart, .btn-user, .btn-store {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  color: #333333;
+  text-decoration: none;
+}
+
+/* end các icon */
