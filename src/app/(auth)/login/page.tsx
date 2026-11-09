@@ -13,7 +13,6 @@ const quicksand = Quicksand({
 });
 
 export default function LoginPage() {
-  // Sửa lỗi cú pháp và khai báo kiểu TypeScript cho `e`
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handling Login logic

@@ -13,7 +13,6 @@ const quicksand = Quicksand({
 });
 
 export default function LoginPage() {
-  // Sửa lỗi cú pháp và khai báo kiểu TypeScript cho `e`
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handling Login logic
@@ -76,11 +75,24 @@ export default function LoginPage() {
                   id="username"
                   name="username"
                   className="form-group-input"
-                  placeholder="Email hoặc tên đăng nhập"
+                  placeholder="Nhập email của bạn"
                   required
                 />
+
+                {/* Nút Submit */}
+                <button type="submit" className="btn btn-primary">
+                  Gửi mã OTP
+                </button>
+
               </div>
             </div>
+
+            {/* Quên mật khẩu */}
+                <div className="form-options">
+                  <Link href="#" className="form-options-forgot">
+                    Gửi lại!
+                  </Link>
+                </div>
 
             {/* Field: Password */}
             <div className="form-group">
@@ -89,7 +101,7 @@ export default function LoginPage() {
               </label>
               <div className="form-group-input-wrapper">
                 <img
-                  src="/images/lock.png"
+                  src="/images/shield-check.png"
                   alt="Lock Icon"
                   className="form-group-icon"
                 />
@@ -142,19 +154,8 @@ export default function LoginPage() {
                 />
               </div>
             </div>
-
-            {/* Quên mật khẩu */}
-            <div className="form-options">
-              <Link href="/forgot-password" className="form-options-forgot">
-                Quên mật khẩu?
-              </Link>
-            </div>
-
-            {/* Nút Submit */}
+            
             <button type="submit" className="btn btn-primary">
-              Gửi lại
-            </button>
-            <button type="submit" className="btn btn-primary-1">
               Xác nhận
             </button>
 

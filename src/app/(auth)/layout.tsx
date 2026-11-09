@@ -1,7 +1,7 @@
 // app/layout.tsx
 import React from 'react';
 import { Roboto, Playfair_Display } from 'next/font/google';
-import './style.css'; // File CSS toàn cục[cite: 2]
+import './style-auth.css'; // File CSS toàn cục[cite: 2]
 
 // 1. Khai báo Font Roboto (cho toàn trang)
 const roboto = Roboto({

@@ -1,9 +1,10 @@
 'use client';
 
-import './style.css';
 import { Quicksand } from 'next/font/google';
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import './style.css';
 
 const quicksand = Quicksand({
   weight: ['400', '600', '700'],
@@ -11,161 +12,157 @@ const quicksand = Quicksand({
   variable: '--font-quicksand',
 });
 
-export default function RegisterPage() {
+export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    // Handling Login logic
   };
 
   return (
-    <div className={`inner-container ${quicksand.className}`}>
-      {/* Cột trái: Banner Lookbook */}
+    <div className={`inner-page ${quicksand.className}`}>
+      {/* Container chính */}
       <main className="inner">
+        
+        {/* CỘT TRÁI: Hình ảnh Banner thời trang */}
         <div className="inner-banner">
           <img
             src="/images/anh-2.jpg"
             alt="Lumen Fashion Model"
             className="inner-image"
           />
-          <div className="inner-content">
-            <h2>
-              JOIN THE<br />FASHION<br />MOVEMENT.
-            </h2>
+          <div className="inner-overlay-text">
+            <h2>JOIN THE<br />FASHION<br />MOVEMENT.</h2>
           </div>
         </div>
 
-        {/* Cột phải: Form Đăng ký */}
-        <div className="inner-form-register">
-          {/* Logo thương hiệu */}
+        {/* CỘT PHẢI: Khung Form Đăng nhập */}
+        <div className="inner-form-container">
+          
+          {/* Logo LUMEN góc trên Form */}
           <div className="inner-brand">
-            <div className="inner-logo">
-              <img src="/images/logo-2.png" alt="logo-web" className="inner-logo-web"/>
-            </div>
+            <Link href="/" className="inner-brand-link">
+              <img src="/images/logo-5.png" className="inner-brand-logo-icon" alt="Lumen Logo" />
+            </Link>
           </div>
 
-          <h1 className="inner-header-title">Tạo Tài Khoản</h1>
-          <p className="inner-header-subtitle">
-            Tham gia LUMEN để khám phá các bộ sưu tập<br/> thời trang độc quyền
-          </p>
+          {/* Header tiêu đề */}
+          <header className="inner-header">
+            <h1 className="inner-header-title">Chào Mừng Trở Lại!</h1>
+            <p className="inner-header-subtitle">
+              Bạn đã có tài khoản?{' '}
+              <Link href="/login" className="inner-header-link">
+                đăng nhập
+              </Link>
+            </p>
+          </header>
 
-          {/* Form nhập liệu */}
+          {/* Form nhập liệu chính */}
           <form className="inner-form" onSubmit={handleSubmit}>
-            {/* Full Name */}
-            <div className="inner-control">
-              <label htmlFor="fullname" className="form-control-label">
+            
+            {/* Field: Email / Username */}
+            <div className="form-group">
+              <label htmlFor="username" className="form-group-label">
                 Họ và tên *
               </label>
-              <input
-                type="text"
-                id="fullname"
-                name="fullname"
-                className="form-control__input"
-                placeholder="Nhập họ và tên của bạn"
-                required
-              />
+              <div className="form-group-input-wrapper">
+                <img
+                  src="/images/user.svg"
+                  alt="User Icon"
+                  className="form-group-icon"
+                />
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  className="form-group-input"
+                  placeholder="Nhập họ và tên của bạn"
+                  required
+                />
+              </div>
             </div>
 
-            {/* Email */}
-            <div className="form-control">
-              <label htmlFor="email" className="form-control__label">
+            <div className="form-group">
+              <label htmlFor="username" className="form-group-label">
                 Email *
               </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="form-control__input"
-                placeholder="Nhập email của bạn"
-                required
-              />
+              <div className="form-group-input-wrapper">
+                <img
+                  src="/images/envelope.png"
+                  alt="Email Icon"
+                  className="form-group-icon"
+                />
+                <input
+                  type="email"
+                  id="eamil"
+                  name="email"
+                  className="form-group-input"
+                  placeholder="Nhập email của bạn"
+                  required
+                />
+              </div>
             </div>
 
-            {/* Password */}
-            <div className="form-control">
-              <label htmlFor="password" className="form-control__label">
+            {/* Field: Password */}
+            <div className="form-group">
+              <label htmlFor="password" className="form-group-label">
                 Mật khẩu *
               </label>
-              <div className="input-password-wrapper">
+              <div className="form-group-input-wrapper">
+                <img
+                  src="/images/lock.png"
+                  alt="Lock Icon"
+                  className="form-group-icon"
+                />
                 <input
                   type="password"
                   id="password"
                   name="password"
-                  className="form-control-password"
-                  placeholder="Mật khẩu tối thiểu 8 kí tự"
+                  className="form-group-input"
+                  placeholder="Nhập mật khẩu"
                   required
                 />
-                <button
-                  type="button"
-                  className="input-password-wrapper"
-                  aria-label="Toggle password visibility"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </button>
-              </div>
-            </div><div className="form-control">
-              <label htmlFor="password" className="form-control__label">
-                Xác nhận mật khẩu *
-              </label>
-              <div className="input-password-wrapper">
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  className="form-control-password"
-                  placeholder="Mật khẩu tối thiểu 8 kí tự"
-                  required
-                />
-                <button
-                  type="button"
-                  className="input-password-wrapper"
-                  aria-label="Toggle password visibility"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </button>
               </div>
             </div>
 
-            {/* Nút hành động */}
-            <button type="submit" className="btn-primary">
-              Tạo tài khoản
+            <div className="form-group">
+              <label htmlFor="username" className="form-group-label">
+                Xác nhận mật khẩu *
+              </label>
+              <div className="form-group-input-wrapper">
+                <img
+                  src="/images/lock.png"
+                  alt="Lock Icon"
+                  className="form-group-icon"
+                />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="form-group-input"
+                  placeholder="Nhập lại mật khẩu"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Nút Submit */}
+            <button type="submit" className="btn btn-primary">
+              Đăng ký
             </button>
 
-            <button type="button" className="btn-google">
-              <img
-                src="/images/icon-google.jpg"
-                alt="Google Icon"
-                className="btn-icon"
-              />
-              Đăng nhập với Google
-            </button>
-
-            <p className="inner-switch">
-              Đã có tài khoản?{' '}
-              <a href="/login" className="inner-switch-link">
-                Đăng nhập
-              </a>
-            </p>
+            {/* Đăng nhập Social */}
+            <div className="form-social">
+              <button type="button" className="btn btn-google">
+                <img
+                  src="https://www.svgrepo.com/show/475656/google-color.svg"
+                  alt="Google"
+                  className="btn-icon"
+                />
+                Đăng nhập với Google
+              </button>
+            </div>
           </form>
+
         </div>
       </main>
     </div>
