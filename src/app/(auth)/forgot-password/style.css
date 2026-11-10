@@ -1,0 +1,21 @@
+.inner-form .form-group {
+  position: relative;
+  width: 100%;
+}
+
+.form-group .btn-primary {
+  position: absolute;
+  left: 215px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-left: 50px;
+  width: 68px;
+  height: 32px;
+  border-radius: 5px;
+}
+
+.inner-form .form-options {
+  margin-bottom: 0;
+  margin-right: 15px;
+}
