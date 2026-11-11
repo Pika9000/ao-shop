@@ -1,5 +1,5 @@
+import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import './globals.css';
-
 
 export const metadata = {
   title: 'LUMEN',

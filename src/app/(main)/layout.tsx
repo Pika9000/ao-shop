@@ -1,6 +1,7 @@
 import './style.css';
 import Nav from '@/components/Nav';
 
+
 export const metadata = {
   title: 'LUMEN',
   description: 'Cửa hàng áo thời trang Lumen',

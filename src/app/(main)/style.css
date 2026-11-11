@@ -5,4 +5,88 @@
     object-position: center -140px;
 }
 
+.inner-container .inner-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.inner-wrap .inner-sales {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* mã khuyến mãi */
+
+.section-one {
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.col-12 .inner-header {
+    display: flex;
+    justify-content:center;
+    margin-top: -50px;
+}
+
+
+.col-xl-4 .inner-wrap {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    gap: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); 
+
+
+}
+
+.inner-wrap .inner-left {
+    width: 20%;
+    height: auto;
+    
+}
+
+.inner-wrap .inner-right {
+    border-left: 1px dashed #ccc;
+    padding-left: 15px;
+    margin: 15px 10px;
+}
+
+.box-top .header-box {
+    margin-bottom: 5px;
+}
+
+.box-top .desc {
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.inner-right .box-bot {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    margin-top: 15px;
+}
+
+.box-bot .link-voucher {
+    color:#2463EB;
+}
+
+.box-bot .btn-primary {
+    background-color: #F24A48;
+    color: #fff;
+    border: none;
+    padding: 8px 10px;
+    right: 50px;
+}
+
+
+/* end mã khuyến mãi */
+
+
+
 
