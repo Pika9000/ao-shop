@@ -28,6 +28,10 @@ li {
   padding: 0;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
 /* Cho tất cả thẻ link trong danh sách ôm khít chữ */
 ul a, ol a {
   display: block;        /* Đưa về block để kiểm soát padding/margin chuẩn */
