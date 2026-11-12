@@ -38,6 +38,10 @@ export const productQuerySchema = z
 
     categoryId: z.string().trim().min(1).optional(),
 
+    size: z.string().trim().min(1).optional(),
+
+    color: z.string().trim().min(1).optional(),
+
     minPrice: optionalNumber.pipe(z.number().finite().min(0).optional()),
 
     maxPrice: optionalNumber.pipe(z.number().finite().min(0).optional()),

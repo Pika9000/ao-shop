@@ -12,6 +12,8 @@ export async function GET(request: NextRequest) {
       limit: params.get("limit") ?? undefined,
       search: params.get("search") ?? undefined,
       categoryId: params.get("categoryId") ?? undefined,
+      size: params.get("size") ?? undefined,
+      color: params.get("size") ?? undefined,
       minPrice: params.get("minPrice") ?? undefined,
       maxPrice: params.get("maxPrice") ?? undefined,
       sortBy: params.get("sortBy") ?? undefined,

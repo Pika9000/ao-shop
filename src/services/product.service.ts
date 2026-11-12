@@ -12,6 +12,7 @@ export class ProductError extends Error {
   }
 }
 
+// các trường dữ liệu cần lấy
 const productSelect = {
   id: true,
   name: true,
@@ -48,6 +49,8 @@ export async function getProducts(options: Partial<ProductListOptions> = {}) {
     limit = 10,
     search,
     categoryId,
+    size,
+    color,
     minPrice,
     maxPrice,
     sortBy = "newest",
@@ -65,6 +68,13 @@ export async function getProducts(options: Partial<ProductListOptions> = {}) {
     priceFilter.lte = new Prisma.Decimal(maxPrice);
   }
 
+  // tạo điều kiện lọc size, color, còn hàng, tránh trường hợp hết hàng vẫn hiển thị
+  const variantFilter: Prisma.ProductVariantWhereInput = {
+    ...(size ? { size } : {}),
+    ...(color ? { color } : {}),
+    ...(inStock ? { stockQuantity: { gt: 0 } } : {}),
+  };
+
   const where: Prisma.ProductWhereInput = {
     ...(search
       ? {
@@ -75,14 +85,10 @@ export async function getProducts(options: Partial<ProductListOptions> = {}) {
       : {}),
     ...(categoryId ? { categoryId } : {}),
     ...(Object.keys(priceFilter).length > 0 ? { price: priceFilter } : {}),
-    ...(inStock
+    ...(Object.keys(variantFilter).length > 0
       ? {
           variants: {
-            some: {
-              stockQuantity: {
-                gt: 0,
-              },
-            },
+            some: variantFilter,
           },
         }
       : {}),
