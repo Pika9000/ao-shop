@@ -1,16 +1,55 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import './style.css';
 
+import Swiper from 'swiper';
+import { Pagination, Autoplay } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 export default function Home() {
+
+  useEffect(() => {
+    const swiper = new Swiper('.mySwiper', {
+      modules: [Pagination, Autoplay],
+      pagination: {
+        el: '.swiper-pagination',
+        dynamicBullets: true,
+      },
+      autoplay: {
+        delay: 10000, 
+        disableOnInteraction: false,
+      },
+    });
+
+    return () => {
+      if (swiper) swiper.destroy();
+    };
+  }, []);
+
   return (
     <>
-      {/* ảnh banner lớn */}
-      <div className="banner">
-        <img src="/images/mau-4.png" alt="ảnh banner" className="image-banner"/>
+      {/* ẢNH BANNER LỚN */}
+      <div className="section-banner">
+        <div className="swiper mySwiper">
+          <div className="swiper-wrapper">
+            <div className="swiper-slide">
+              <img src="/images/banner-0.png" />
+            </div>
+            <div className="swiper-slide">
+              <img src="/images/banner-1.png" />
+            </div>
+            <div className="swiper-slide">
+              <img src="/images/banner-2.png" />
+            </div>
+          </div>
+          <div className="swiper-pagination"></div>
+        </div>
       </div>
+      {/* KẾT THÚC BANNER LỚN */}
 
       {/* mã khuyến mãi */}
       <div className="section-one">
@@ -261,9 +300,197 @@ export default function Home() {
         </div>
       </div>
 
-    {/* thông tin mã khuyến mãi */}
-
   {/* kết thúc mã khuyến mãi */}
+
+
+  {/* Sản phẩm mới */}
+    
+    <div className="section-two">
+      <div className="container container-2">
+        {/* Hàng 1: Tiêu đề */}
+        <div className="row">
+          <div className="col-12">
+            <div className="inner-header-2">
+              <h2 className="inner-title-2">
+                Sản phẩm mới
+              </h2>
+              <p className="inner-desc-2">
+                Hãy tạo nên phong cách riêng của bạn
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Hàng 2: Danh sách sản phẩm (CHỈ DÙNG 1 THẺ ROW BỌC TẤT CẢ CÁC CỘT) */}
+        <div className="row">
+          {/* Sản phẩm 1 */}
+          <div className="col-xl-3 col-lg-4 col-md-6 col-12">
+            <div className="container-box">
+              <div className="inner-wrap">
+                <div className="inner-top">
+                  <img src="/images/mau-1.png" alt="áo polo" />
+                  <i className="fi fi-rr-heart"></i>
+                  <div className="container-tab">
+                    <div className="tab-new">
+                      new
+                    </div>
+                  </div>
+                </div>
+                <div className="inner-bot">
+                  <div className="inner-title">Áo polo phong cách</div>
+                  <div className="inner-price">799.000đ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sản phẩm 2 */}
+          <div className="col-xl-3 col-lg-4 col-md-6 col-12">
+            <div className="container-box">
+              <div className="inner-wrap">
+                <div className="inner-top">
+                  <img src="/images/mau-1.png" alt="áo polo" />
+                  <i className="fi fi-rr-heart"></i>
+                  <div className="container-tab">
+                    <div className="tab-new">
+                      new
+                    </div>
+                  </div>
+                </div>
+                <div className="inner-bot">
+                  <div className="inner-title">Áo polo phong cách</div>
+                  <div className="inner-price">799.000đ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sản phẩm 3 */}
+          <div className="col-xl-3 col-lg-4 col-md-6 col-12">
+            <div className="container-box">
+              <div className="inner-wrap">
+                <div className="inner-top">
+                  <img src="/images/mau-1.png" alt="áo polo" />
+                  <i className="fi fi-rr-heart"></i>
+                  <div className="container-tab">
+                    <div className="tab-new">
+                      new
+                    </div>
+                  </div>
+                </div>
+                <div className="inner-bot">
+                  <div className="inner-title">Áo polo phong cách</div>
+                  <div className="inner-price">799.000đ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sản phẩm 4 */}
+          <div className="col-xl-3 col-lg-4 col-md-6 col-12">
+            <div className="container-box">
+              <div className="inner-wrap">
+                <div className="inner-top">
+                  <img src="/images/mau-1.png" alt="áo polo" />
+                  <i className="fi fi-rr-heart"></i>
+                  <div className="container-tab">
+                    <div className="tab-new">
+                      new
+                    </div>
+                  </div>
+                </div>
+                <div className="inner-bot">
+                  <div className="inner-title">Áo polo phong cách</div>
+                  <div className="inner-price">799.000đ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-xl-3 col-lg-4 col-md-6 col-12">
+            <div className="container-box">
+              <div className="inner-wrap">
+                <div className="inner-top">
+                  <img src="/images/mau-1.png" alt="áo polo" />
+                  <i className="fi fi-rr-heart"></i>
+                  <div className="container-tab">
+                    <div className="tab-new">
+                      new
+                    </div>
+                  </div>
+                </div>
+                <div className="inner-bot">
+                  <div className="inner-title">Áo polo phong cách</div>
+                  <div className="inner-price">799.000đ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-xl-3 col-lg-4 col-md-6 col-12">
+            <div className="container-box">
+              <div className="inner-wrap">
+                <div className="inner-top">
+                  <img src="/images/mau-1.png" alt="áo polo" />
+                  <i className="fi fi-rr-heart"></i>
+                  <div className="container-tab">
+                    <div className="tab-new">
+                      new
+                    </div>
+                  </div>
+                </div>
+                <div className="inner-bot">
+                  <div className="inner-title">Áo polo phong cách</div>
+                  <div className="inner-price">799.000đ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-xl-3 col-lg-4 col-md-6 col-12">
+            <div className="container-box">
+              <div className="inner-wrap">
+                <div className="inner-top">
+                  <img src="/images/mau-1.png" alt="áo polo" />
+                  <i className="fi fi-rr-heart"></i>
+                  <div className="container-tab">
+                    <div className="tab-new">
+                      new
+                    </div>
+                  </div>
+                </div>
+                <div className="inner-bot">
+                  <div className="inner-title">Áo polo phong cách</div>
+                  <div className="inner-price">799.000đ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-xl-3 col-lg-4 col-md-6 col-12">
+            <div className="container-box">
+              <div className="inner-wrap">
+                <div className="inner-top">
+                  <img src="/images/mau-1.png" alt="áo polo" />
+                  <i className="fi fi-rr-heart"></i>
+                  <div className="container-tab">
+                    <div className="tab-new">
+                      new
+                    </div>
+                  </div>
+                </div>
+                <div className="inner-bot">
+                  <div className="inner-title">Áo polo phong cách</div>
+                  <div className="inner-price">799.000đ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  {/* Kết thúc sản phẩm mới */}
     </>
   );
 }

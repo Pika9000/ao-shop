@@ -2,7 +2,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center -140px;
+    object-position: center ;
 }
 
 .inner-container .inner-wrap {
@@ -24,7 +24,7 @@
 
 .section-one {
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .section-one .container {
@@ -35,8 +35,8 @@
 .col-12 .inner-header {
     display: flex;
     justify-content:center;
-    margin-top: -50px;
     font-weight: 600;
+    margin-top: 15px;
 }
 
 
@@ -95,7 +95,73 @@
 }
 
 
-/* end mã khuyến mãi */
+/* kết thúc mã khuyến mãi */
+
+/* Sản phẩm mới */
+.col-12 .inner-header-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    margin-bottom: 25px;
+}
+
+.inner-header .inner-title-2{
+    font-weight: 600;
+}
+
+.section-two .container-2 {
+    height: 500px;
+}
+
+.container-box {
+    width: 100%;
+    height: 400px;
+}
+.inner-wrap .inner-top img {
+    width: 90%;
+    height: 350px;
+    object-fit: cover;
+
+}
+
+.inner-wrap .inner-top {
+    position: relative;
+}
+
+.inner-top .fi-rr-heart {
+    position:absolute;
+    top: 15px;
+    right: 45px;
+}
+
+.inner-top .tab-new {
+    position:absolute;
+    top: 10px;
+    left: 15px;
+    color: #fff;
+    background-color: red;
+    padding: 0 5px;
+    font-weight: 900;
+}
+
+.inner-bot .inner-title {
+    font-weight: 600;
+
+}
+
+.inner-bot .inner-price {
+    font-weight: 600;
+    color: red;
+}
+
+.container-box {
+    margin: 15px;
+}
+
+
+
+/* Kết thúc sản phẩm mới */
 
 
 
