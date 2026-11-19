@@ -1,7 +1,7 @@
 # TÀI LIỆU ĐẶC TẢ API CHUẨN (RESTful API SPECIFICATION)
 Dự án: **Website Bán Quần Áo (Áo Shop)**  
 Người phụ trách: **Thành viên C (Git, DevOps & BA)**  
-Phiên bản: **v1.0** — Cập nhật theo Schema Prisma mới nhất.
+Phiên bản: **v1.1** — Cập nhật theo Schema Prisma và bổ sung đặc tả thanh toán VietQR & MoMo.
 
 ---
 
@@ -322,7 +322,7 @@ Phiên bản: **v1.0** — Cập nhật theo Schema Prisma mới nhất.
   {
     "addressId": "addr_1",
     "shippingAddress": "97 Man Thiện, P. Hiệp Phú, TP Thủ Đức, TP HCM (Người nhận: Trần Quốc Long - 0912345678)",
-    "paymentMethod": "COD", // Enum: "COD", "VIETQR", "PAYPAL"
+    "paymentMethod": "COD", // Enum: "COD", "VIETQR", "MOMO"
     "shippingFee": 30000,
     "discountAmount": 0
   }
@@ -402,7 +402,7 @@ Phiên bản: **v1.0** — Cập nhật theo Schema Prisma mới nhất.
 
 ---
 
-### PHẦN V: THANH TOÁN (PAYMENTS - VIETQR & PAYPAL)
+### PHẦN V: THANH TOÁN (PAYMENTS - VIETQR & MOMO)
 
 #### 1. Tạo mã VietQR thanh toán ngân hàng
 - **Endpoint:** `POST /payments/vietqr/generate`
@@ -417,59 +417,157 @@ Phiên bản: **v1.0** — Cập nhật theo Schema Prisma mới nhất.
   ```json
   {
     "success": true,
+    "message": "Đã tạo mã VietQR thanh toán",
     "data": {
+      "paymentId": "pay_vietqr_123",
       "qrUrl": "https://img.vietqr.io/image/970422-0123456789-compact2.png?amount=530000&addInfo=AOSHOP%20order_abc123",
+      "bankBin": "970422",
+      "bankCode": "MB",
       "accountNo": "0123456789",
       "accountName": "SHOP AO OFFICIAL",
-      "bankCode": "MB",
       "amount": 530000,
-      "content": "AOSHOP order_abc123"
+      "content": "AOSHOP order_abc123",
+      "status": "PENDING"
     }
+  }
+  ```
+- **Response `400 Bad Request` / `404 Not Found`:**
+  ```json
+  {
+    "success": false,
+    "error": "Đơn hàng không tồn tại hoặc đã được thanh toán",
+    "code": "INVALID_ORDER_PAYMENT"
   }
   ```
 
 ---
 
-#### 2. Tạo đơn PayPal (Create PayPal Order)
-- **Endpoint:** `POST /payments/paypal/create-order`
-- **Quyền:** Authenticated User
+#### 2. Xác nhận thanh toán VietQR (Admin duyệt hoặc Webhook SePay/Casso)
+- **Endpoint:** `POST /payments/vietqr/confirm`
+- **Quyền:** Admin hoặc Webhook Secret Header
 - **Request Body:**
   ```json
   {
-    "orderId": "order_abc123"
+    "orderId": "order_abc123",
+    "transactionId": "FT263240001122"
   }
   ```
 - **Response `200 OK`:**
   ```json
   {
     "success": true,
+    "message": "Xác nhận thanh toán VietQR thành công",
     "data": {
-      "paypalOrderId": "PAYPAL_ORDER_987654"
+      "orderId": "order_abc123",
+      "paymentStatus": "SUCCESS",
+      "orderStatus": "PAID",
+      "transactionId": "FT263240001122",
+      "paidAt": "2026-11-20T01:20:00.000Z"
     }
   }
   ```
 
 ---
 
-#### 3. Xác nhận thanh toán PayPal thành công (Capture Order)
-- **Endpoint:** `POST /payments/paypal/capture-order`
+#### 3. Tạo giao dịch thanh toán MoMo (Gateway v2)
+- **Endpoint:** `POST /payments/momo/create`
 - **Quyền:** Authenticated User
 - **Request Body:**
   ```json
   {
     "orderId": "order_abc123",
-    "paypalOrderId": "PAYPAL_ORDER_987654"
+    "requestType": "payWithMethod"
   }
   ```
+  *(Tùy chọn `requestType`: `"payWithMethod"` [mặc định, hỗ trợ nhập thẻ test trên web], `"captureWallet"` [quét QR ví MoMo], hoặc `"payWithATM"`).*
 - **Response `200 OK`:**
   ```json
   {
     "success": true,
-    "message": "Thanh toán PayPal thành công!",
+    "message": "Đã khởi tạo phiên thanh toán MoMo",
     "data": {
-      "paymentStatus": "SUCCESS",
-      "transactionId": "TXN_PAYPAL_112233"
+      "orderId": "order_abc123",
+      "requestId": "REQ_order_abc123_1795112400",
+      "payUrl": "https://test-payment.momo.vn/v2/gateway/pay?t=...",
+      "qrCodeUrl": "https://test-payment.momo.vn/v2/gateway/qr?t=...",
+      "deeplink": "momo://app?action=payWithApp..."
     }
+  }
+  ```
+- **Response `400 Bad Request` / `404 Not Found` / `502 Bad Gateway`:**
+  ```json
+  {
+    "success": false,
+    "error": "Không thể tạo giao dịch MoMo lúc này",
+    "code": "MOMO_CREATE_FAILED"
+  }
+  ```
+
+---
+
+#### 4. Webhook IPN nhận kết quả từ MoMo
+- **Endpoint:** `POST /payments/momo/ipn`
+- **Quyền:** MoMo Server Callback *(Bắt buộc xác thực chữ ký `HMAC-SHA256` bằng `MOMO_SECRET_KEY` trước khi cập nhật bảng `Order` và `Payment`)*
+- **Request Body (MoMo gửi về):**
+  ```json
+  {
+    "partnerCode": "MOMOBKUN20180529",
+    "orderId": "order_abc123",
+    "requestId": "REQ_order_abc123_1795112400",
+    "amount": 530000,
+    "orderInfo": "Thanh toan don hang order_abc123",
+    "orderType": "momo_wallet",
+    "transId": 4123456789,
+    "resultCode": 0,
+    "message": "Successful.",
+    "payType": "napas",
+    "responseTime": 1795112460000,
+    "extraData": "",
+    "signature": "a1b2c3d4e5f6..."
+  }
+  ```
+- **Response `200 OK` / `204 No Content`:**
+  ```json
+  {
+    "success": true,
+    "message": "IPN processed"
+  }
+  ```
+- **Response `400 Bad Request` (Sai chữ ký `signature`):**
+  ```json
+  {
+    "success": false,
+    "error": "Chữ ký IPN MoMo không hợp lệ",
+    "code": "INVALID_SIGNATURE"
+  }
+  ```
+
+---
+
+#### 5. Xác thực kết quả khi MoMo chuyển về `redirectUrl` (Hỗ trợ kiểm thử trên `localhost`)
+- **Endpoint:** `GET /payments/momo/verify`
+- **Quyền:** Authenticated User
+- **Query Parameters:** Nhận toàn bộ query params MoMo trả về trên URL (`partnerCode`, `orderId`, `requestId`, `amount`, `transId`, `resultCode`, `message`, `extraData`, `signature`, ...).
+- **Lưu ý:** Backend phải kiểm tra lại chữ ký `signature` (không tin tham số `resultCode=0` trên URL trình duyệt) trước khi đánh dấu thanh toán thành công.
+- **Response `200 OK`:**
+  ```json
+  {
+    "success": true,
+    "message": "Thanh toán MoMo thành công",
+    "data": {
+      "orderId": "order_abc123",
+      "paymentStatus": "SUCCESS",
+      "orderStatus": "PAID",
+      "transactionId": "4123456789"
+    }
+  }
+  ```
+- **Response `400 Bad Request` (Chữ ký sai hoặc giao dịch thất bại / bị hủy):**
+  ```json
+  {
+    "success": false,
+    "error": "Giao dịch MoMo chưa thành công hoặc chữ ký không hợp lệ",
+    "code": "MOMO_VERIFY_FAILED"
   }
   ```
 

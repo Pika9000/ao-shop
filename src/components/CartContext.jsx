@@ -1,54 +1,99 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from "react"
 
-// 1. Tạo một cái "Kho chứa chung" (Context)
-const CartContext = createContext();
+const CartContext = createContext()
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([])
+  const [totalQuantity, setTotalQuantity] = useState(0)
+  const [totalAmount, setTotalAmount] = useState(0)
+  const [loading, setLoading] = useState(true)
 
-  // Hàm này chạy 1 lần khi web vừa mở lên: Lấy giỏ hàng từ bộ nhớ trình duyệt ra
-  useEffect(() => {
-    const savedCart = localStorage.getItem('ao_shop_cart');
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
-    }
-  }, []);
+  const syncState = useCallback((data) => {
+    setCart(data?.items || [])
+    setTotalQuantity(data?.totalQuantity || 0)
+    setTotalAmount(data?.totalAmount || 0)
+  }, [])
 
-  // Hàm thêm áo vào giỏ
-  const addToCart = (product) => {
-    setCart((gh_cu) => {
-      // Kiểm tra xem áo này đã có trong giỏ chưa
-      const daCo = gh_cu.find(item => item.id === product.id);
-      let gh_moi;
-      
-      if (daCo) {
-        // Nếu có rồi thì tăng số lượng lên 1
-        gh_moi = gh_cu.map(item => 
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      } else {
-        // Nếu chưa có thì thêm áo mới vào với số lượng = 1
-        gh_moi = [...gh_cu, { ...product, quantity: 1 }];
+  const refreshCart = useCallback(async () => {
+    setLoading(true)
+    try {
+      const res = await fetch("/api/cart", { cache: "no-store" })
+      const json = await res.json()
+      if (res.ok && json.success) {
+        syncState(json.data)
       }
-      
-      // Lưu lại vào bộ nhớ trình duyệt để f5 không bị mất
-      localStorage.setItem('ao_shop_cart', JSON.stringify(gh_moi));
-      return gh_moi;
-    });
-    
-    alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
-  };
+    } catch {
+      // Giữ nguyên state hiện tại nếu mất kết nối tạm thời
+    } finally {
+      setLoading(false)
+    }
+  }, [syncState])
+
+  useEffect(() => {
+    refreshCart()
+  }, [refreshCart])
+
+  const mutateCart = async (url, options) => {
+    try {
+      const res = await fetch(url, options)
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        return { ok: false, error: json.error || "Thao tác giỏ hàng thất bại" }
+      }
+      syncState(json.data)
+      return { ok: true, message: json.message }
+    } catch {
+      return { ok: false, error: "Lỗi kết nối tới máy chủ" }
+    }
+  }
+
+  const addToCart = async (product, quantity = 1) => {
+    const result = await mutateCart("/api/cart/items", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productId: product.id, quantity }),
+    })
+    if (result.ok) {
+      alert(`Đã thêm "${product.name}" vào giỏ hàng!`)
+    } else {
+      alert(result.error)
+    }
+    return result
+  }
+
+  const updateQuantity = (productId, quantity) =>
+    mutateCart(`/api/cart/items/${productId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ quantity }),
+    })
+
+  const removeItem = (productId) =>
+    mutateCart(`/api/cart/items/${productId}`, { method: "DELETE" })
+
+  const clearCart = () => mutateCart("/api/cart", { method: "DELETE" })
 
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        totalQuantity,
+        totalAmount,
+        loading,
+        refreshCart,
+        addToCart,
+        updateQuantity,
+        removeItem,
+        clearCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
-  );
+  )
 }
 
-// Hàm rút gọn để các file khác lấy giỏ hàng ra dùng cho nhanh
 export function useCart() {
-  return useContext(CartContext);
+  return useContext(CartContext)
 }
