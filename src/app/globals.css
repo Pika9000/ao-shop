@@ -335,3 +335,123 @@ body {
 .admin-actions-cell {
   white-space: nowrap;
 }
+
+/* Cart UI */
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 40px;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-empty {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.cart-empty p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.cart-qty-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-qty-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cart-qty-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart-qty-value {
+  min-width: 24px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.cart-summary-total {
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+.cart-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.cart-back-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-vietqr {
+  background-color: #0d6efd;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-momo {
+  background-color: #a50064;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-vietqr:disabled,
+.btn-momo:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cart-qr-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+}
+
+.cart-qr-img {
+  width: 240px;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.cart-qr-info {
+  line-height: 1.8;
+}
