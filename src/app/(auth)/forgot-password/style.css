@@ -1,5 +1,4 @@
 .inner-form .form-group {
-<<<<<<< HEAD
   position: relative;
   width: 100%;
 }
@@ -19,25 +18,4 @@
 .inner-form .form-options {
   margin-bottom: 0;
   margin-right: 15px;
-=======
-    position: relative;
-    width: 100%;
-}
-
-.form-group .btn-primary {
-    position: absolute;
-    left: 215px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    margin-left: 50px;
-    width: 68px;
-    height: 32px;
-    border-radius: 5px;
-}
-
-.inner-form .form-options {
-    margin-bottom: 0;
-    margin-right: 15px;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 }

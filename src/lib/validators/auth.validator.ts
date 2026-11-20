@@ -1,6 +1,5 @@
 // xác thực tài khoản
 // Zod là một thư viện kiểm tra tính hợp lệ (schema validation)
-
 import { z } from "zod";
 
 // định dạng email
@@ -32,11 +31,11 @@ export const registerSchema = z.object({
 
 // Đăng nhập bằng email hoặc tên đăng nhập
 export const loginSchema = z.object({
-  loginIdentifier: z
+  email: z
     .string()
     .trim()
     .min(1, "Vui lòng nhập email hoặc tên đăng nhập.")
-    .max(254, "Thông tin đăng nhập quá dài."),
+    .email("Email không đúng định dạng."),
 
   password: z
     .string()

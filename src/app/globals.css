@@ -1,17 +1,10 @@
-<<<<<<< HEAD
+@import url("https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 /* Reset margin, padding và thiết lập box-sizing chuẩn cho tất cả phần tử */
 *,
 *::before,
 *::after {
-=======
-@import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-
-/* Reset margin, padding và thiết lập box-sizing chuẩn cho tất cả phần tử */
-*, *::before, *::after {
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -23,20 +16,12 @@ html {
 }
 
 body {
-<<<<<<< HEAD
   font-family: "Quicksand", sans-serif;
   margin: 0;
 }
 
 ul,
 ol {
-=======
-  font-family: 'Quicksand', sans-serif;
-  margin: 0;
-}
-
-ul, ol {
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   list-style: none;
   margin: 0;
   padding: 0;
@@ -47,7 +32,10 @@ li {
   padding: 0;
 }
 
-<<<<<<< HEAD
+p {
+  margin: 0;
+  padding: 0;
+}
 /* Cho tất cả thẻ link trong danh sách ôm khít chữ */
 ul a,
 ol a {
@@ -55,18 +43,6 @@ ol a {
   line-height: 1; /* Khống chế chiều cao dòng ôm sát chân chữ */
   padding: 0; /* Xóa padding thừa mặc định nếu có */
 }
-=======
-p {
-  margin: 0;
-  padding: 0;
-}
-/* Cho tất cả thẻ link trong danh sách ôm khít chữ */
-ul a, ol a {
-  display: block;        /* Đưa về block để kiểm soát padding/margin chuẩn */
-  line-height: 1;        /* Khống chế chiều cao dòng ôm sát chân chữ */
-  padding: 0;            /* Xóa padding thừa mặc định nếu có */
-}
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 main {
   display: block;
 }
@@ -172,78 +148,6 @@ button::-moz-focus-inner,
 [type="submit"]::-moz-focus-inner {
   border-style: none;
   padding: 0;
-<<<<<<< HEAD
-}
-
-button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
-fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-legend {
-  box-sizing: border-box;
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  padding: 0;
-  white-space: normal;
-}
-
-progress {
-  vertical-align: baseline;
-}
-
-textarea {
-  overflow: auto;
-}
-
-[type="checkbox"],
-[type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-[type="search"] {
-  -webkit-appearance: textfield;
-  outline-offset: -2px;
-}
-
-[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
-}
-
-details {
-  display: block;
-}
-
-summary {
-  display: list-item;
-}
-
-template {
-  display: none;
-}
-
-[hidden] {
-  display: none;
-=======
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 }
 
 button:-moz-focusring,

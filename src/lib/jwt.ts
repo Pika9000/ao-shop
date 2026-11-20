@@ -17,6 +17,7 @@ function getJwtSecret(): Uint8Array {
 export type AuthPayload = {
   userId: string;
   email?: string;
+  role: "USER" | "ADMIN";
 };
 
 // Tạo JWT sau khi đăng nhập thành công.
@@ -25,6 +26,7 @@ export async function createAuthToken(
 ): Promise<string> {
   return new SignJWT({
     email: payload.email,
+    role: payload.role,
   })
     .setProtectedHeader({ alg: "HS256" })
     .setSubject(payload.userId)

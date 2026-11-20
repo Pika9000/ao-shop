@@ -10,7 +10,6 @@ import {
   VerifyOtpInput,
   ResetPasswordInput,
 } from "@/lib/validators/auth.validator";
-import { z } from "zod";
 
 export class AuthError extends Error {
   constructor(
@@ -128,12 +127,13 @@ export async function registerUser(data: RegisterInput) {
         id: true,
         name: true,
         email: true,
+        role: true,
         emailVerified: true,
       },
     });
 
     return {
-      message: "Đăng ký thành công. Hãy xác minh email.",
+      message: "Đăng ký thành công.",
       user,
     };
   } catch (error) {
@@ -153,20 +153,12 @@ export async function registerUser(data: RegisterInput) {
 
 // 2. ĐĂNG NHẬP (Hỗ trợ bằng Email hoặc Tên đăng nhập)
 export async function loginUser(data: LoginInput) {
-  const { loginIdentifier, password } = data;
-
-  // kiểm tra người dùng nhập email hay tên đăng nhập
-  const isEmail = z.string().email().safeParse(loginIdentifier).success;
-  const cleanIdentifier = loginIdentifier.trim().toLowerCase();
+  const { email, password } = data;
+  const cleanEmail = email.trim().toLowerCase();
 
   // Tìm kiếm user trong database: khớp email HOẶC khớp name
-  const user = await prisma.user.findFirst({
-    where: {
-      OR: [
-        ...(isEmail ? [{ email: cleanIdentifier }] : []), // tìm theo email
-        { name: loginIdentifier }, // Tìm theo tên đăng nhập
-      ],
-    },
+  const user = await prisma.user.findUnique({
+    where: { email: cleanEmail },
   });
 
   if (
@@ -174,19 +166,13 @@ export async function loginUser(data: LoginInput) {
     !user.passwordHash ||
     !(await bcrypt.compare(password, user.passwordHash))
   ) {
-    throw new AuthError(
-      "Email/Tên đăng nhập hoặc mật khẩu không chính xác.",
-      401,
-    );
-  }
-
-  if (!user.emailVerified) {
-    throw new AuthError("Vui lòng xác minh email trước khi đăng nhập.", 403);
+    throw new AuthError("Email hoặc mật khẩu không chính xác.", 401);
   }
 
   const token = await createAuthToken({
     userId: user.id,
     email: user.email,
+    role: user.role,
   });
 
   return {
@@ -196,6 +182,7 @@ export async function loginUser(data: LoginInput) {
       id: user.id,
       name: user.name,
       email: user.email,
+      role: user.role,
     },
   };
 }
@@ -312,11 +299,7 @@ export async function resetPassword(data: ResetPasswordInput) {
     throw new AuthError("Mật khẩu mới không được vượt quá 72 bytes.");
   }
 
-  const { identifier } = await verifyAndGetOtpRecord(
-    email,
-    "reset",
-    code,
-  );
+  const { identifier } = await verifyAndGetOtpRecord(email, "reset", code);
 
   const passwordHash = await bcrypt.hash(newPassword, 12);
 
@@ -324,9 +307,9 @@ export async function resetPassword(data: ResetPasswordInput) {
   await prisma.$transaction([
     prisma.user.update({
       where: { email },
-      data: { 
+      data: {
         passwordHash,
-        emailVerified: new Date() // Tiện ích: Kích hoạt luôn email vì họ đã vào mail lấy được OTP chính chủ
+        emailVerified: new Date(), // Tiện ích: Kích hoạt luôn email vì họ đã vào mail lấy được OTP chính chủ
       },
     }),
     prisma.verificationToken.deleteMany({

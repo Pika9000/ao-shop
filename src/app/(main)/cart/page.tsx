@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 "use client";
 
 import React from "react";
-=======
-'use client';
-
-import React from 'react';
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 
 export default function CartPage() {
   return (
@@ -28,8 +22,4 @@ export default function CartPage() {
       </div>
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c

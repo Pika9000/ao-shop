@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     const validatedData = loginSchema.parse(body);
 
     const result = await loginUser({
-      loginIdentifier: validatedData.loginIdentifier, // email hoặc tên đăng nhập
+      email: validatedData.email,
       password: validatedData.password,
     });
 

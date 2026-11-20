@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
-=======
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 
 /* 1. RESET BAN ĐẦU & NỀN TRANG WEB */
 * {
@@ -11,7 +7,6 @@
   padding: 0;
 }
 
-<<<<<<< HEAD
 html,
 body {
   min-height: 100vh;
@@ -22,12 +17,6 @@ body {
     system-ui,
     -apple-system,
     sans-serif;
-=======
-html, body {
-  min-height: 100vh;
-  background: white;
-  font-family: var(--font-quicksand), "Quicksand", system-ui, -apple-system, sans-serif;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 }
 
 /* Khung bao toàn màn hình */
@@ -45,11 +34,7 @@ html, body {
   width: 100%;
   max-width: 960px;
   min-height: 540px;
-<<<<<<< HEAD
   background-color: #ffffff;
-=======
-  background-color: #FFFFFF;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -74,22 +59,14 @@ html, body {
   object-fit: cover;
   display: block;
   border-radius: 40px;
-<<<<<<< HEAD
   padding: 15px;
-=======
-  padding:15px;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 }
 
 .inner-overlay-text {
   position: absolute;
   bottom: 30px;
   left: 30px;
-<<<<<<< HEAD
   color: #ffffff;
-=======
-  color: #FFFFFF;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -148,11 +125,7 @@ html, body {
 }
 
 .inner-header-link {
-<<<<<<< HEAD
   color: #7047eb;
-=======
-  color: #7047EB;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   font-weight: 600;
   text-decoration: none;
 }
@@ -201,16 +174,11 @@ html, body {
   height: 42px;
   padding-left: 40px; /* Thụt lề để không dính vào Icon */
   padding-right: 12px;
-<<<<<<< HEAD
   border: 1px solid #cccccc;
-=======
-  border: 1px solid #CCCCCC;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   border-radius: 8px;
   font-family: inherit;
   font-size: 14px;
   outline: none;
-<<<<<<< HEAD
   transition:
     border-color 0.2s,
     box-shadow 0.2s;
@@ -218,13 +186,6 @@ html, body {
 
 .form-group-input:focus {
   border-color: #4e718a;
-=======
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.form-group-input:focus {
-  border-color: #4E718A;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   box-shadow: 0 0 0 3px rgba(78, 113, 138, 0.15);
 }
 
@@ -236,11 +197,7 @@ html, body {
 
 .form-options-forgot {
   font-size: 13px;
-<<<<<<< HEAD
   color: #4e718a;
-=======
-  color: #4E718A;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   text-decoration: none;
   font-weight: 500;
 }
@@ -263,13 +220,9 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-<<<<<<< HEAD
   transition:
     background-color 0.2s,
     transform 0.1s;
-=======
-  transition: background-color 0.2s, transform 0.1s;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 }
 
 .btn:active {
@@ -277,13 +230,8 @@ html, body {
 }
 
 .btn-primary {
-<<<<<<< HEAD
   background-color: #a1c5d0;
   color: #ffffff;
-=======
-  background-color: #A1C5D0;
-  color: #FFFFFF;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 }
 
 .btn-primary:hover {
@@ -295,7 +243,6 @@ html, body {
 }
 
 .btn-google {
-<<<<<<< HEAD
   background-color: #ffffff;
   color: #333333;
   border: 1px solid #cccccc;
@@ -303,23 +250,10 @@ html, body {
 
 .btn-google:hover {
   background-color: #f8f9fa;
-=======
-  background-color: #FFFFFF;
-  color: #333333;
-  border: 1px solid #CCCCCC;
-}
-
-.btn-google:hover {
-  background-color: #F8F9FA;
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
 }
 
 .btn-icon {
   width: 18px;
   height: 18px;
   object-fit: contain;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
