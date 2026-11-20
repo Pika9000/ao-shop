@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { Quicksand } from "next/font/google";
@@ -116,11 +117,37 @@ export default function ForgotPasswordPage() {
     } finally {
       setIsLoading(false);
     }
+=======
+'use client';
+
+import { Quicksand } from 'next/font/google';
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import './style.css';
+
+const quicksand = Quicksand({
+  weight: ['400', '600', '700'],
+  subsets: ['latin', 'vietnamese'],
+  variable: '--font-quicksand',
+});
+
+export default function LoginPage() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handling Login logic
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   };
 
   return (
     <div className={`inner-page ${quicksand.className}`}>
+<<<<<<< HEAD
       <main className="inner">
+=======
+      {/* Container chính */}
+      <main className="inner">
+        
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
         {/* CỘT TRÁI: Hình ảnh Banner thời trang */}
         <div className="inner-banner">
           <img
@@ -129,6 +156,7 @@ export default function ForgotPasswordPage() {
             className="inner-image"
           />
           <div className="inner-overlay-text">
+<<<<<<< HEAD
             <h2>
               JOIN THE
               <br />
@@ -157,10 +185,34 @@ export default function ForgotPasswordPage() {
               Bạn đã nhớ lại mật khẩu?{" "}
               <Link href="/login" className="inner-header-link">
                 Đăng nhập
+=======
+            <h2>JOIN THE<br />FASHION<br />MOVEMENT.</h2>
+          </div>
+        </div>
+
+        {/* CỘT PHẢI: Khung Form Đăng nhập */}
+        <div className="inner-form-container">
+          
+          {/* Logo LUMEN góc trên Form */}
+          <div className="inner-brand">
+            <Link href="/" className="inner-brand-link">
+              <img src="/images/logo-5.png" className="inner-brand-logo-icon" alt="Lumen Logo" />
+            </Link>
+          </div>
+
+          {/* Header tiêu đề */}
+          <header className="inner-header">
+            <h1 className="inner-header-title">Quên mật khẩu!</h1>
+            <p className="inner-header-subtitle">
+              Bạn đã có tài khoản?{' '}
+              <Link href="/login" className="inner-header-link">
+                đăng nhập
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
               </Link>
             </p>
           </header>
 
+<<<<<<< HEAD
           {/* Hiển thị thông báo trạng thái */}
           {message.text && (
             <div
@@ -179,6 +231,14 @@ export default function ForgotPasswordPage() {
             {/* Field 1: Email và Nút Gửi OTP */}
             <div className="form-group">
               <label htmlFor="email" className="form-group-label">
+=======
+          {/* Form nhập liệu chính */}
+          <form className="inner-form" onSubmit={handleSubmit}>
+            
+            {/* Field: Email / Username */}
+            <div className="form-group">
+              <label htmlFor="username" className="form-group-label">
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
                 Email đăng nhập *
               </label>
               <div className="form-group-input-wrapper">
@@ -188,6 +248,7 @@ export default function ForgotPasswordPage() {
                   className="form-group-icon"
                 />
                 <input
+<<<<<<< HEAD
                   type="email"
                   id="email"
                   name="email"
@@ -330,8 +391,115 @@ export default function ForgotPasswordPage() {
               </>
             )}
           </form>
+=======
+                  type="text"
+                  id="username"
+                  name="username"
+                  className="form-group-input"
+                  placeholder="Nhập email của bạn"
+                  required
+                />
+
+                {/* Nút Submit */}
+                <button type="submit" className="btn btn-primary">
+                  Gửi mã OTP
+                </button>
+
+              </div>
+            </div>
+
+            {/* Quên mật khẩu */}
+                <div className="form-options">
+                  <Link href="#" className="form-options-forgot">
+                    Gửi lại!
+                  </Link>
+                </div>
+
+            {/* Field: Password */}
+            <div className="form-group">
+              <label htmlFor="password" className="form-group-label">
+                Nhập mã OTP *
+              </label>
+              <div className="form-group-input-wrapper">
+                <img
+                  src="/images/shield-check.png"
+                  alt="Lock Icon"
+                  className="form-group-icon"
+                />
+                <input
+                  type="number"
+                  id="password"
+                  name="password"
+                  className="form-group-input"
+                  placeholder="Nhập mã OTP"
+                  required
+                />
+              </div>
+            </div><div className="form-group">
+              <label htmlFor="password" className="form-group-label">
+                Nhập mật khẩu *
+              </label>
+              <div className="form-group-input-wrapper">
+                <img
+                  src="/images/lock.png"
+                  alt="Lock Icon"
+                  className="form-group-icon"
+                />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="form-group-input"
+                  placeholder="Nhập mật khẩu"
+                  required
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="password" className="form-group-label">
+                Nhập lại mật khẩu *
+              </label>
+              <div className="form-group-input-wrapper">
+                <img
+                  src="/images/lock.png"
+                  alt="Lock Icon"
+                  className="form-group-icon"
+                />
+                <input
+                  type="number"
+                  id="password"
+                  name="password"
+                  className="form-group-input"
+                  placeholder="Nhập mật khẩu"
+                  required
+                />
+              </div>
+            </div>
+            
+            <button type="submit" className="btn btn-primary">
+              Xác nhận
+            </button>
+
+            {/* Đăng nhập Social */}
+            <div className="form-social">
+              <button type="button" className="btn btn-google">
+                <img
+                  src="https://www.svgrepo.com/show/475656/google-color.svg"
+                  alt="Google"
+                  className="btn-icon"
+                />
+                Đăng nhập với Google
+              </button>
+            </div>
+          </form>
+
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
         </div>
       </main>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c

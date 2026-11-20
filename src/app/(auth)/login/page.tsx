@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { Quicksand } from "next/font/google";
@@ -65,12 +66,36 @@ export default function LoginPage() {
     } finally {
       setIsLoading(false);
     }
+=======
+'use client';
+
+import { Quicksand } from 'next/font/google';
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import './style.css';
+
+const quicksand = Quicksand({
+  weight: ['400', '600', '700'],
+  subsets: ['latin', 'vietnamese'],
+  variable: '--font-quicksand',
+});
+
+export default function LoginPage() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handling Login logic
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
   };
 
   return (
     <div className={`inner-page ${quicksand.className}`}>
       {/* Container chính */}
       <main className="inner">
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
         {/* CỘT TRÁI: Hình ảnh Banner thời trang */}
         <div className="inner-banner">
           <img
@@ -79,6 +104,7 @@ export default function LoginPage() {
             className="inner-image"
           />
           <div className="inner-overlay-text">
+<<<<<<< HEAD
             <h2>
               JOIN THE
               <br />
@@ -86,11 +112,15 @@ export default function LoginPage() {
               <br />
               MOVEMENT.
             </h2>
+=======
+            <h2>JOIN THE<br />FASHION<br />MOVEMENT.</h2>
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
           </div>
         </div>
 
         {/* CỘT PHẢI: Khung Form Đăng nhập */}
         <div className="inner-form-container">
+<<<<<<< HEAD
           {/* Logo LUMEN góc trên Form */}
           <div className="inner-brand">
             <Link href="/" className="inner-brand-link">
@@ -99,6 +129,13 @@ export default function LoginPage() {
                 className="inner-brand-logo-icon"
                 alt="Lumen Logo"
               />
+=======
+          
+          {/* Logo LUMEN góc trên Form */}
+          <div className="inner-brand">
+            <Link href="/" className="inner-brand-link">
+              <img src="/images/logo-5.png" className="inner-brand-logo-icon" alt="Lumen Logo" />
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
             </Link>
           </div>
 
@@ -106,13 +143,18 @@ export default function LoginPage() {
           <header className="inner-header">
             <h1 className="inner-header-title">Chào Mừng Trở Lại!</h1>
             <p className="inner-header-subtitle">
+<<<<<<< HEAD
               Bạn chưa có tài khoản?{" "}
+=======
+              Bạn chưa có tài khoản?{' '}
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
               <Link href="/register" className="inner-header-link">
                 đăng ký
               </Link>
             </p>
           </header>
 
+<<<<<<< HEAD
           {/* Hiển thị lỗi trực quan nếu có */}
           {errorMessage && (
             <div
@@ -128,6 +170,14 @@ export default function LoginPage() {
             {/* Field: Email / Username */}
             <div className="form-group">
               <label htmlFor="loginIdentifier" className="form-group-label">
+=======
+          {/* Form nhập liệu chính */}
+          <form className="inner-form" onSubmit={handleSubmit}>
+            
+            {/* Field: Email / Username */}
+            <div className="form-group">
+              <label htmlFor="username" className="form-group-label">
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
                 Email đăng nhập *
               </label>
               <div className="form-group-input-wrapper">
@@ -138,11 +188,18 @@ export default function LoginPage() {
                 />
                 <input
                   type="text"
+<<<<<<< HEAD
                   id="loginIdentifier"
                   name="loginIdentifier"
                   className="form-group-input"
                   placeholder="Email hoặc tên đăng nhập"
                   disabled={isLoading}
+=======
+                  id="username"
+                  name="username"
+                  className="form-group-input"
+                  placeholder="Email hoặc tên đăng nhập"
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
                   required
                 />
               </div>
@@ -165,7 +222,10 @@ export default function LoginPage() {
                   name="password"
                   className="form-group-input"
                   placeholder="Nhập mật khẩu"
+<<<<<<< HEAD
                   disabled={isLoading}
+=======
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
                   required
                 />
               </div>
@@ -179,12 +239,17 @@ export default function LoginPage() {
             </div>
 
             {/* Nút Submit */}
+<<<<<<< HEAD
             <button
               type="submit"
               className="btn btn-primary"
               disabled={isLoading}
             >
               {isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
+=======
+            <button type="submit" className="btn btn-primary">
+              Đăng nhập
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
             </button>
 
             {/* Đăng nhập Social */}
@@ -199,8 +264,16 @@ export default function LoginPage() {
               </button>
             </div>
           </form>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
         </div>
       </main>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c

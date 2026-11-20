@@ -1,6 +1,177 @@
+<<<<<<< HEAD
 .banner .image-banner {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center -140px;
 }
+=======
+.banner .image-banner  {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center ;
+}
+
+.inner-container .inner-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.inner-wrap .inner-sales {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* mã khuyến mãi */
+
+.section-one {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.section-one .container {
+    max-width: 1100px; 
+    margin: 0 auto;
+}
+
+.col-12 .inner-header {
+    display: flex;
+    justify-content:center;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+
+.col-xl-4 .inner-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content:center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); 
+    margin-bottom: 15px;
+}
+
+.inner-wrap .inner-left {
+    width: 30%;
+    border-right: 1px dashed #ccc;
+}
+
+.inner-wrap .inner-left img{
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.inner-wrap .inner-right {
+    flex:1;
+    padding-left: 10px;
+    margin: 10px 10px;
+}
+
+.box-top .header-box {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.box-top .desc {
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.inner-right .box-bot {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    margin-top: 10px;
+}
+
+.box-bot .link-voucher {
+    color:#2463EB;
+}
+
+.box-bot .btn-primary {
+    background-color: #F24A48;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    right: 50px;
+}
+
+
+/* kết thúc mã khuyến mãi */
+
+/* Sản phẩm mới */
+.col-12 .inner-header-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    margin-bottom: 25px;
+}
+
+.inner-header .inner-title-2{
+    font-weight: 600;
+}
+
+.section-two .container-2 {
+    height: 500px;
+}
+
+.container-box {
+    width: 100%;
+    height: 400px;
+}
+.inner-wrap .inner-top img {
+    width: 90%;
+    height: 350px;
+    object-fit: cover;
+
+}
+
+.inner-wrap .inner-top {
+    position: relative;
+}
+
+.inner-top .fi-rr-heart {
+    position:absolute;
+    top: 15px;
+    right: 45px;
+}
+
+.inner-top .tab-new {
+    position:absolute;
+    top: 10px;
+    left: 15px;
+    color: #fff;
+    background-color: red;
+    padding: 0 5px;
+    font-weight: 900;
+}
+
+.inner-bot .inner-title {
+    font-weight: 600;
+
+}
+
+.inner-bot .inner-price {
+    font-weight: 600;
+    color: red;
+}
+
+.container-box {
+    margin: 15px;
+}
+
+
+
+/* Kết thúc sản phẩm mới */
+
+
+
+
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c

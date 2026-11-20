@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .navigation {
   position: sticky;
   z-index: 1000;
@@ -147,3 +148,93 @@ body {
 }
 
 /* end các icon */
+=======
+@import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css');
+
+
+/* thanh điều hướng */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 99999;
+    background-color: white;
+}
+
+.header .inner-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+}
+
+/* phần logo */
+.inner-main .inner-logo img {
+    width: auto;
+    height: 40px;
+    margin-left: 50px;
+}
+
+/* Kết thúc phần logo */
+
+/* Phần menu */
+
+.inner-menu ul {
+    display: flex;
+    gap: 80px; 
+    font-weight: 400;
+    font-size: 18px;
+}
+
+/* Menu "Trang chu" */
+.nav-list .menu-1 {
+    font-weight: 700;
+}
+
+/* Ket thuc Menu "Trang chu" */
+
+/* Menu "San pham" */
+.nav-list .menu-2:hover {
+    font-weight: 700;
+}
+
+/* Ket thuc Menu "San pham" */
+
+/* Menu "Sale" */
+.nav-list .menu-3 {
+    color: #ED6A6C;
+}
+
+.nav-list .menu-3:hover {
+    font-weight: 700;
+    color: #ED6A6C;
+}
+
+/* Ket thuc Menu "Sale" */
+
+/* Menu "Gioi thieu" */
+.nav-list .menu-4:hover {
+    font-weight: 700;
+}
+
+/* Ket thuc Menu "Gioi thieu" */
+
+/* Kết thúc phần menu */
+
+/* Phần giỏ hàng */
+.inner-icon .inner-wrap {
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;  
+    font-size: 24px;
+    color:black;
+    gap: 20px;
+}
+
+
+/* Kết thuc phần giỏ hàng */
+
+/* Kết thúc thanh điều hướng */
+>>>>>>> 42f8b71c5f43dfe6b315bf884d21f14968387e5c
