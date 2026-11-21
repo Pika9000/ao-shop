@@ -15,6 +15,7 @@ export async function POST(request: NextRequest) {
     const result = await applyVoucher(
       validatedData.code,
       validatedData.orderTotal,
+      userId,
     );
 
     // trả về kết quả thành công

@@ -12,7 +12,11 @@ export class VoucherError extends Error {
 }
 
 // kiểm tra và tính toán số tiền giảm từ mã voucher cho 1 đơn hàng
-export async function applyVoucher(code: string, orderTotal: number) {
+export async function applyVoucher(
+  code: string,
+  orderTotal: number,
+  userId?: string,
+) {
   const normalizeCode = code.trim().toUpperCase();
   const now = new Date();
 
@@ -44,6 +48,23 @@ export async function applyVoucher(code: string, orderTotal: number) {
   // kiểm tra giới hạn số lần sử dụng
   if (voucher.usageLimit !== null && voucher.usedCount >= voucher.usageLimit) {
     throw new VoucherError("Mã giảm giá đã hết lượt sử dụng.", 400);
+  }
+
+  // Tận dụng ngay bảng Order để kiểm tra xem user này đã dùng mã này chưa
+  // (Bỏ qua các đơn hàng đã bị hủy - CANCELLED)
+  if (userId) {
+    const usedOrder = await prisma.order.findFirst({
+      where: {
+        userId: userId,
+        voucherId: voucher.id,
+        status: { not: "CANCELLED" },
+      },
+      select: { id: true },
+    });
+
+    if (usedOrder) {
+      throw new VoucherError("Bạn đã sử dụng mã giảm giá này rồi.", 400);
+    }
   }
 
   // kiểm tra giá trị đơn hàng tối thiểu
@@ -92,4 +113,46 @@ export async function applyVoucher(code: string, orderTotal: number) {
     finalTotal: orderTotal - discountAmount,
     message: "Áp dụng mã giảm thành công!",
   };
+}
+
+// Tăng lượt sử dụng an toàn bên trong Transaction khi tạo đơn hàng
+export async function incrementVoucherUsage(
+  tx: Prisma.TransactionClient,
+  voucherId: string,
+  usageLimit: number | null,
+) {
+  const updateResult = await tx.voucher.updateMany({
+    where: {
+      id: voucherId,
+      isActive: true,
+      ...(usageLimit !== null ? { usedCount: { lt: usageLimit } } : {}),
+    },
+    data: {
+      usedCount: { increment: 1 },
+    },
+  });
+
+  if (updateResult.count === 0) {
+    throw new VoucherError(
+      "Mã giảm giá vừa hết lượt sử dụng, vui lòng thử mã khác.",
+      400,
+    );
+  }
+}
+
+// Hoàn lại 1 lượt sử dụng voucher khi hủy đơn hàng
+export async function decrementVoucherUsage(
+  tx: Prisma.TransactionClient,
+  voucherId: string,
+) {
+  // Dùng updateMany kèm điều kiện usedCount > 0 để đảm bảo số lượt không bao giờ bị âm
+  await tx.voucher.updateMany({
+    where: {
+      id: voucherId,
+      usedCount: { gt: 0 },
+    },
+    data: {
+      usedCount: { decrement: 1 },
+    },
+  });
 }

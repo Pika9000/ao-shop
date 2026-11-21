@@ -36,6 +36,12 @@ export const createOrderSchema = z
       .array(orderItemSchema)
       .min(1, "Đơn hàng phải có sản phẩm.")
       .max(50, "Tối đa 50 dòng sản phẩm."),
+    voucherCode: z
+      .string()
+      .trim()
+      .optional()
+      .nullable()
+      .transform((val) => (!val ? undefined : val)),
   })
   .refine((data) => Boolean(data.addressId) !== Boolean(data.shippingAddress), {
     message:

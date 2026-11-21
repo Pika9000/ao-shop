@@ -1,11 +1,61 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { upsertVoucherSchema } from "@/lib/validators/voucher.validator";
+import { getUserIdFromToken, OrderError } from "@/services/order.service";
 import { ZodError } from "zod";
 import { Prisma } from "@prisma/client";
 
+// hàm hỗ trợ kiểm tra quyền admin
+async function verifyAdmin(request: NextRequest) {
+  const token = request.cookies.get("auth_token")?.value;
+
+  if (!token) {
+    return NextResponse.json(
+      { success: false, message: "Vui lòng đăng nhập để tiếp tục." },
+      { status: 401 },
+    );
+  }
+
+  try {
+    const userId = await getUserIdFromToken(token);
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { role: true },
+    });
+
+    if (!user || user.role !== "ADMIN") {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Bạn không có quyền truy cập chức năng này.",
+        },
+        { status: 403 },
+      );
+    }
+
+    return null;
+  } catch (error) {
+    const status = error instanceof OrderError ? error.statusCode : 401;
+    return NextResponse.json(
+      {
+        success: false,
+        message:
+          error instanceof OrderError
+            ? error.message
+            : "Phiên đăng nhập không hợp lệ.",
+      },
+      { status },
+    );
+  }
+}
+
 // GET: Lấy danh sách các mã giảm giá cho trang Admin
 export async function GET(_request: NextRequest) {
+  // Kiểm tra quyền Admin
+  const authError = await verifyAdmin(_request);
+  if (authError) return authError;
+
   try {
     const vouchers = await prisma.voucher.findMany({
       orderBy: { createdAt: "desc" },
@@ -29,6 +79,10 @@ export async function GET(_request: NextRequest) {
 
 // POST: tạo mới 1 voucher
 export async function POST(request: NextRequest) {
+  // Kiểm tra quyền Admin
+  const authError = await verifyAdmin(request);
+  if (authError) return authError;
+
   try {
     const body = await request.json();
 

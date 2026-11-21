@@ -1,13 +1,12 @@
 import { prisma } from "@/lib/prisma";
-import {
-  OrderStatus,
-  PaymentStatus,
-  Prisma,
-} from "@prisma/client";
+import { OrderStatus, PaymentStatus, Prisma } from "@prisma/client";
 import { jwtVerify } from "jose";
+import { CreateOrderInput } from "@/lib/validators/order.validator";
 import {
-  CreateOrderInput,
-} from "@/lib/validators/order.validator";
+  applyVoucher,
+  incrementVoucherUsage,
+  decrementVoucherUsage,
+} from "@/services/voucher.service";
 
 export class OrderError extends Error {
   constructor(
@@ -218,11 +217,40 @@ export async function createOrder(userId: string, input: CreateOrderInput) {
         });
       }
 
-      // Tính tổng tiền đơn hàng
+      // Tính tổng tiền đơn hàng và áp dụng voucher nếu có
       const shippingFee = new Prisma.Decimal(0);
-      const discountAmount = new Prisma.Decimal(0);
+      let discountAmount = new Prisma.Decimal(0);
+      let appliedVoucherId: string | null = null;
 
-      const totalAmount = subtotal.add(shippingFee).sub(discountAmount);
+      if (input.voucherCode) {
+        // Kiểm tra điều kiện voucher dựa trên tiền hàng (subtotal) và userId
+        const voucherResult = await applyVoucher(
+          input.voucherCode,
+          subtotal.toNumber(),
+          userId,
+        );
+
+        discountAmount = new Prisma.Decimal(voucherResult.discountAmount);
+        appliedVoucherId = voucherResult.voucherId;
+
+        // Tăng lượt sử dụng voucher an toàn trong cùng transaction
+        const voucherInfo = await tx.voucher.findUnique({
+          where: { id: appliedVoucherId },
+          select: { usageLimit: true },
+        });
+
+        await incrementVoucherUsage(
+          tx,
+          appliedVoucherId,
+          voucherInfo?.usageLimit ?? null,
+        );
+      }
+
+      // Đảm bảo tổng tiền thanh toán không bị âm
+      const rawTotal = subtotal.add(shippingFee).sub(discountAmount);
+      const totalAmount = rawTotal.lessThan(0)
+        ? new Prisma.Decimal(0)
+        : rawTotal;
 
       // Trừ số lượng tồn kho
       for (const item of orderItems) {
@@ -252,6 +280,7 @@ export async function createOrder(userId: string, input: CreateOrderInput) {
       const order = await tx.order.create({
         data: {
           userId,
+          voucherId: appliedVoucherId,
           totalAmount,
           shippingFee,
           discountAmount,
@@ -412,4 +441,63 @@ export async function getMyOrderById(userId: string, orderId: string) {
 
   // Trả về chi tiết đơn hàng
   return order;
+}
+
+export async function cancelOrder(userId: string, orderId: string) {
+  return await prisma.$transaction(async (tx) => {
+    // Tìm đơn hàng thuộc về userId này
+    const order = await tx.order.findFirst({
+      where: {
+        id: orderId,
+        userId,
+      },
+      include: {
+        orderItems: true,
+      },
+    });
+
+    if (!order) {
+      throw new OrderError("Không tìm thấy đơn hàng.", 404);
+    }
+
+    // Chỉ cho phép hủy khi đơn đang ở trạng thái chờ xử lý (PENDING)
+    if (order.status !== OrderStatus.PENDING) {
+      throw new OrderError(
+        "Chỉ có thể hủy đơn hàng đang ở trạng thái chờ xác nhận.",
+        400,
+      );
+    }
+
+    // Cập nhật trạng thái đơn sang CANCELLED (chống bấm hủy 2 lần cùng lúc)
+    const updatedOrder = await tx.order.updateMany({
+      where: {
+        id: order.id,
+        status: OrderStatus.PENDING,
+      },
+      data: {
+        status: OrderStatus.CANCELLED,
+      },
+    });
+
+    if (updatedOrder.count !== 1) {
+      throw new OrderError("Đơn hàng đã được hủy trước đó.", 409);
+    }
+
+    // Hoàn lại số lượng tồn kho cho từng biến thể sản phẩm
+    for (const item of order.orderItems) {
+      await tx.productVariant.update({
+        where: { id: item.variantId },
+        data: {
+          stockQuantity: { increment: item.quantity },
+        },
+      });
+    }
+
+    // Hoàn lại 1 lượt sử dụng voucher nếu đơn hàng có áp dụng mã
+    if (order.voucherId) {
+      await decrementVoucherUsage(tx, order.voucherId);
+    }
+
+    return { message: "Hủy đơn hàng thành công." };
+  });
 }
