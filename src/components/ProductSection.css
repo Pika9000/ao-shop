@@ -1,0 +1,132 @@
+
+/* Sản phẩm mới */
+.section-two {
+    margin-bottom: 25px;
+}
+.col-xl-3  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row .container-box {
+    display: flex;
+    justify-content:center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15); 
+    border-radius: 20px;
+    margin-bottom: 25px;
+    padding: 15px;
+    width: 100%;
+    height: 490px;
+
+}
+
+.col-12 .inner-header-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    margin: 25px 0;
+}
+
+.inner-header .inner-title-2{
+    font-weight: 700;
+}
+
+.section-two .container-2 {
+    height: 1150px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); 
+    border-radius: 15px;
+}
+
+.inner-wrap .inner-top {
+    position: relative;
+    width: 100%;
+    height:300px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.inner-wrap .inner-top img {  
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.inner-wrap .inner-bot {
+    flex: 1;
+}
+
+.inner-top .fi-rr-heart {
+    position:absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 25px;
+    background-color: white;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 8px;
+    border-radius: 25px;
+}
+
+.inner-top .fi-rr-heart:hover {
+    color: #F24A48;
+    background-color: #ffe4e6; 
+    transform: scale(1.08);   
+}
+
+.inner-top .fi-rr-heart.is-liked {
+    color: #F24A48;
+    background-color: #ffe4e6;
+}
+
+.inner-top .tab-new {
+    position:absolute;
+    top: 10px;
+    left: 15px;
+    color: #fff;
+    background-color: red;
+    padding: 0 5px;
+    font-weight: 900;
+    border-radius: 5px;
+}
+
+.inner-bot .inner-title {
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: 15px;
+    min-height: 2.6em;
+}
+
+.inner-bot .inner-price {
+    font-weight: 600;
+    color: red;
+    margin-top: 10px;
+}
+
+.inner-bot .btn-buy-now {
+    width: 100%;
+    height: 50px;
+    color: white;
+    font-weight: 700;
+    background-color: black;
+    border-radius: 25px;
+    border: none;
+    margin-top: 15px;
+}
+
+.inner-bot .btn-buy-now:hover {
+    background-color: rgb(51, 51, 51);
+}
+
+.inner-bot .btn-buy-now:active {
+    transform: scale(0.98);
+}
+
+
+/* Kết thúc sản phẩm mới */
+
+

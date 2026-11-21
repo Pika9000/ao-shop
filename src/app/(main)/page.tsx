@@ -12,127 +12,10 @@ import 'swiper/css/pagination';
 // Import Component khung sản phẩm đã tách riêng
 // (Nếu dự án báo lỗi đường dẫn '@/', em đổi thành '../components/ProductSection')
 import ProductSection from '@/components/ProductSection';
-import { Product } from '@/components/ProductCard';
+import { VOUCHERS, NEW_ARRIVALS, BEST_SELLERS, SALE_PRODUCTS } from '@/data/mockData';
 
 // 1. DỮ LIỆU MÃ KHUYẾN MÃI
-const VOUCHERS = [
-  {
-    id: '100k',
-    code: 'LUMEN100K',
-    title: 'Giảm 100k',
-    condition: 'Cho đơn hàng tối thiểu 1,000k',
-    expiry: '01/01/2027',
-    validFrom: '02/11/2026 - 01/01/2027',
-  },
-  {
-    id: '200k',
-    code: 'LUMEN200K',
-    title: 'Giảm 200k',
-    condition: 'Cho đơn hàng tối thiểu 2,000k',
-    expiry: '01/01/2027',
-    validFrom: '02/11/2026 - 01/01/2027',
-  },
-  {
-    id: '300k',
-    code: 'LUMEN300K',
-    title: 'Giảm 300k',
-    condition: 'Cho đơn hàng tối thiểu 3,000k',
-    expiry: '01/01/2027',
-    validFrom: '02/11/2026 - 01/01/2027',
-  },
-];
 
-// 2. DỮ LIỆU KHU VỰC 1: HÀNG MỚI VỀ (Đầy đủ 8 sản phẩm)
-const NEW_ARRIVALS: Product[] = [
-  {
-    id: 1,
-    name: 'Áo khoác Denim nam wash bạc form rộng phong cách Streetwear',
-    price: '399.000đ',
-    image: '/images/san-pham-1.png',
-    badge: 'new',
-  },
-  {
-    id: 2,
-    name: 'Áo sơ mi đũi nam màu trắng kem tay dài form Relaxed',
-    price: '299.000đ',
-    image: '/images/san-pham-2.png',
-    badge: 'new',
-  },
-  {
-    id: 3,
-    name: 'Áo sơ mi nam xanh pastel tay dài form Oversize Hàn Quốc',
-    price: '199.000đ',
-    image: '/images/san-pham-3.png',
-    badge: 'new',
-  },
-  {
-    id: 4,
-    name: 'Áo khoác gió nam cổ đứng màu xanh Navy tối giản',
-    price: '299.000đ',
-    image: '/images/san-pham-4.png',
-    badge: 'new',
-  },
-  {
-    id: 5,
-    name: 'Áo khoác kaki nam cổ bẻ màu đen dáng Boxy tối giản',
-    price: '299.000đ',
-    image: '/images/san-pham-5.png',
-    badge: 'new',
-  },
-  {
-    id: 6,
-    name: 'Áo khoác Barn Jacket nam cổ phối nâu phong cách Vintage',
-    price: '199.000đ',
-    image: '/images/san-pham-6.png',
-    badge: 'new',
-  },
-  {
-    id: 7,
-    name: 'Áo khoác nỉ Track Jacket nam phối sọc tay phong cách Retro',
-    price: '399.000đ',
-    image: '/images/san-pham-7.png',
-    badge: 'new',
-  },
-  {
-    id: 8,
-    name: 'Áo thun nam tay dài màu trắng trơn chất Cotton dày dặn',
-    price: '199.000đ',
-    image: '/images/san-pham-8.png',
-    badge: 'new',
-  },
-];
-
-// 3. DỮ LIỆU KHU VỰC 2: BÁN CHẠY NHẤT (4 sản phẩm tiêu biểu cho 1 hàng ngang)
-const BEST_SELLERS: Product[] = [
-  {
-    id: 101,
-    name: 'Áo khoác kaki nam cổ bẻ màu đen dáng Boxy tối giản',
-    price: '299.000đ',
-    image: '/images/san-pham-5.png',
-    badge: 'hot',
-  },
-  {
-    id: 102,
-    name: 'Áo khoác Barn Jacket nam cổ phối nâu phong cách Vintage',
-    price: '199.000đ',
-    image: '/images/san-pham-6.png',
-    badge: 'hot',
-  },
-  {
-    id: 103,
-    name: 'Áo khoác Denim nam wash bạc form rộng phong cách Streetwear',
-    price: '399.000đ',
-    image: '/images/san-pham-1.png',
-    badge: 'hot',
-  },
-  {
-    id: 104,
-    name: 'Áo sơ mi nam xanh pastel tay dài form Oversize Hàn Quốc',
-    price: '199.000đ',
-    image: '/images/san-pham-3.png',
-    badge: 'hot',
-  },
-];
 
 export default function Home() {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
@@ -187,7 +70,7 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h2 className="inner-header">Mã khuyến mãi</h2>
+              <h2 className="inner-header">VOUCHER</h2>
             </div>
           </div>
 
@@ -196,7 +79,7 @@ export default function Home() {
               <div key={voucher.id} className="col-xl-4 col-lg-6 col-md-6">
                 <div className="inner-wrap">
                   <div className="inner-left">
-                    <img src="/images/box.png" alt="ảnh hộp quà" />
+                    <img src="/images/box-1.png" alt="ảnh hộp quà" />
                   </div>
                   <div className="inner-right">
                     <div className="box-top">
@@ -291,12 +174,57 @@ export default function Home() {
         products={NEW_ARRIVALS}
       />
 
-      {/* 4. KHU VỰC BÁN CHẠY NHẤT (Tái sử dụng cùng Component) */}
+      {/* Ảnh banner-2 */}
+
+      <div className="section-three">
+        <div className="container">
+          <div className="inner-wrap">
+            <Link href="#">
+              <img src="/images/banner-1.png" alt="Ảnh banner"/>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/*Kết thúc Ảnh banner-2 */}
+
+
+      {/*  KHU VỰC BÁN CHẠY NHẤT  */}
       <ProductSection
         title="BEST SELLERS"
         subtitle="Những thiết kế được yêu thích nhất tuần qua"
         products={BEST_SELLERS}
       />
+
+      {/* Kết thúc KHU VỰC BÁN CHẠY NHẤT */}
+
+
+      {/* Ảnh banner-3 */}
+      <div className="section-three">
+        <div className="container">
+          <div className="inner-wrap">
+            <Link href="#">
+              <img src="/images/banner-0.png" alt="Ảnh banner"/>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/*Kết thúc Ảnh banner-3 */}
+
+
+      {/*  KHU VỰC Sale   */}
+      <ProductSection
+        title="SALE"
+        subtitle="Những thiết kế được SALE"
+        products={SALE_PRODUCTS}
+      />
+
+      {/* Kết thúc KHU VỰC Sale */}
+
+
+            
+
     </>
   );
 }

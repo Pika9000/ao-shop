@@ -1,5 +1,8 @@
 import React from 'react';
-import ProductCard, { Product } from './ProductCard';
+import ProductCard from './ProductCard';
+import { Product } from '../data/mockData';
+import './ProductSection.css';
+
 
 interface ProductSectionProps {
   title: string;

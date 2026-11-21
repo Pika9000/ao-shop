@@ -1,15 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-
-// Xuất (export) kiểu dữ liệu Product để các file khác dùng chung
-export interface Product {
-  id: number;
-  name: string;
-  price: string;
-  image: string;
-  badge?: string; // Dùng linh hoạt: 'new', 'hot', '-20%', hoặc để trống
-}
+import { Product } from '../data/mockData';
 
 export default function ProductCard({ product }: { product: Product }) {
   const [isLiked, setIsLiked] = useState(false);

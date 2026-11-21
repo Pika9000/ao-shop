@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import './style.css';
+import './Nav.css';
 
 export const Nav: React.FC = () => {
   return (
